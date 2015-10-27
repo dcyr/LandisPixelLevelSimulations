@@ -1,12 +1,13 @@
 ---
-title: "LANDIS-II Biomass Succession pixel-level simulations: Central Interior - Sub-Boreal Pine-Spruce (preliminary results)"
+title: 'LANDIS-II Biomass Succession pixel-level simulations: Central Interior - Sub-Boreal
+  Pine-Spruce (preliminary results)'
 author: "Dominic cyr"
 output:
+  pdf_document: default
   html_document:
     keep_md: yes
     theme: cosmo
     toc: yes
-  pdf_document: default
 ---
 Updated on `r format(Sys.time(), "%b %d %Y")`
 
@@ -178,7 +179,7 @@ For that type of ecosystem, the following species were included.
 
 1. Lodgepole Pine (PIN.CON.LAT)
 2. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-3. Aspen (POPU.TRE)
+3. Trembling Aspen (POPU.TRE)
 4. Douglas-fir (PSEU.MEN)
 5. Alpine fir (ABIE.LAS)
 6. Black Spruce (PICE.MAR)

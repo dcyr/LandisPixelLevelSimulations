@@ -37,7 +37,7 @@ For that type of ecosystem, the following species were included.
 
 1. Lodgepole Pine (PIN.CON.LAT)
 2. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-3. Aspen (POPU.TRE)
+3. Trembling Aspen (POPU.TRE)
 4. Douglas-fir (PSEU.MEN)
 5. Alpine fir (ABIE.LAS)
 6. Black Spruce (PICE.MAR)

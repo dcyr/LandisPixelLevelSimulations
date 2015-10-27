@@ -35,7 +35,7 @@ We use such pixel-level simulation to assess the realism of emerging succession 
 For that type of ecosystem, the following species were included.
 
 1. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-2. Aspen (POPU.TRE)
+2. Trembling Aspen (POPU.TRE)
 3. Alpine fir (ABIE.LAS)
 4. Black Spruce (PICE.MAR)
 5. White Birch (BETU.PAP)

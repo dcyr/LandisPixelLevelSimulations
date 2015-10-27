@@ -30,15 +30,15 @@ We use such pixel-level simulation to assess the realism of emerging succession 
 
 -------
 
-### Sub-Boreal Interior - Sub-Boreal Spruce
+### Southern Interior Mountains - Interior Cedar Hemlock 
 
 
 For that type of ecosystem, the following species were included.
 
 1. Western Hemlock (TSUG.HET)
-2. Western Red Cedar (THUJ.PLI)
+2. Western Redcedar (THUJ.PLI)
 3. Douglas-Fir (PSEU.MEN)
-4. Aspen (POPU.TRE)
+4. Trembling Aspen (POPU.TRE)
 5. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
 6. Lodgepole Pine (PIN.CON.LAT)
 
