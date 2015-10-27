@@ -1,0 +1,184 @@
+---
+title: "LANDIS-II Biomass Succession pixel-level simulations: Central Interior - Sub-Boreal Pine-Spruce (preliminary results)"
+author: "Dominic cyr"
+date: "October 26, 2015"
+output:
+  html_document:
+    keep_md: yes
+    theme: cosmo
+  pdf_document: default
+---
+
+```{r packageLoadingChunk, include=FALSE}
+require(RCurl)
+require(raster)
+require(maptools)
+require(rgdal)
+require(rasterVis)
+require(rgeos)
+require(polyclip)
+a <- "MC"
+    
+
+```
+
+
+
+```{r simulationAreas, echo=FALSE, cache=TRUE}
+readURL <- "https://raw.githubusercontent.com/dcyr/LANDIS-II_IA_generalUseFiles/master/"
+vegCodes <- read.csv(text = getURL(paste(readURL, "vegCodes.csv", sep="/")))
+ecozones <- read.csv(text = getURL(paste(readURL, "ecoNames.csv", sep="/")))
+## study area extent
+readURL <- "https://github.com/dcyr/LANDIS-II_IA_generalUseFiles/raw/master/LandisInputs/"
+tmpFile <- tempfile()
+url <- paste(readURL, a, "/landtypes_", a, ".tif", sep="")
+download.file(url, tmpFile, method="wget")
+simArea <- raster(tmpFile)
+```
+
+
+```{r ecozones, echo=FALSE, cache=TRUE}
+### fetching ecozones shapefile online
+url <- "http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip"
+###
+tmpFile <- tempfile()
+tmpDir <- tempdir()
+download.file(url, tmpFile)
+### unzipping
+fileNames <- unzip(tmpFile, list=TRUE)[,1]
+unzip(zipfile = tmpFile,  files = fileNames, exdir=tmpDir)
+### reading shapefile 
+fileIndex <- grep("\\.", basename(fileNames))
+zipFolder <- basename(fileNames[-fileIndex])
+shapefileName <- basename(fileNames)[fileIndex]
+shapefileName <- unique(as.character(lapply(strsplit(shapefileName, "\\."), function(x) x[[1]])))
+### loading shapefile
+shapeFile <- paste(tmpDir, zipFolder, shapefileName, sep="/")
+ecozoneMap <- readShapeSpatial(shapeFile, proj4string = CRS("+proj=longlat +datum=WGS84"))
+## renaming and reordering factors
+levels(ecozoneMap$ZONE_NAME)[which(levels(ecozoneMap$ZONE_NAME)=="Boreal PLain")] <- "Boreal Plain"
+ecozoneMap$ZONE_NAME <- factor(ecozoneMap$ZONE_NAME, levels=c("MixedWood Plain",
+                                                              "Atlantic Maritime",
+                                                              "Boreal Shield",
+                                                              "Prairie",
+                                                              "Boreal Plain",
+                                                              "Montane Cordillera",
+                                                              "Pacific Maritime",
+                                                              "Boreal Cordillera",
+                                                              "Taiga Shield",
+                                                              "Taiga Plain",
+                                                              "Taiga Cordillera",
+                                                              "Hudson Plain",
+                                                              "Southern Arctic",
+                                                              "Northern Arctic",
+                                                              "Arctic Cordillera"))
+
+###  specifying colors
+cols <- c("palegreen",
+           "seagreen3",
+           "palegreen4",
+           "navajowhite1",
+           "darkseagreen2",
+           "darkkhaki",
+           "darkolivegreen4",
+           "burlywood4",
+           "bisque3",
+           "burlywood3",
+           "darkslategray4",
+           "lemonchiffon4",
+           "lightblue1",
+           "lightcyan1",
+           "lightblue3")
+names(cols) <- levels(ecozoneMap$ZONE_NAME)
+```
+
+
+```{r canadaMap, echo=FALSE, cache=TRUE}
+can1 <- getData('GADM', country="CAN", level=1) ## level 1: provinces 
+```
+
+```{r miniGIS, echo=FALSE, cache=TRUE}
+# reference projection
+crsArea <- CRS("+init=epsg:3153") ### NAD83(CSRS) / BC AlbersAlbers Equal Area
+# projecting maps
+can1<- spTransform(can1, crsArea)# NAD83(CSRS) / Statistics Canada Lambert
+ecozoneMap <- spTransform(ecozoneMap, crsArea)
+simArea <- projectRaster(simArea, crs = crsArea)
+# reference extent
+bc <- can1[can1$NAME_1 == "British Columbia",]
+e <-  extent(bc)
+# adding 100 km around province extent
+e <- e+100000
+# cropping shapefiles
+can1Cropped <- crop(can1, e, byid=TRUE)
+# ### rasterize ecozones
+canRaster <- ecoRaster <- raster(ncol=1000, nrow=1000)
+extent(canRaster) <- extent(ecoRaster) <- extent(can1Cropped)
+#
+canRaster <- rasterize(can1Cropped, canRaster)
+ecoRaster <- rasterize(ecozoneMap, ecoRaster, field="ZONE_NAME")
+ecoRaster <- resample(ecoRaster, canRaster, method='ngb')
+ecoRaster[is.na(canRaster)] <- NA
+#
+
+ecoRaster <- ratify(ecoRaster)
+x <- levels(ecoRaster)[[1]]
+x$ecoName <- levels(ecozoneMap$ZONE_NAME)[x$ID]
+x$cols <- as.character(cols)[x$ID] 
+#x$ID <- 1:nrow(x)
+levels(ecoRaster) <- x
+```
+
+```{r mapPlot, echo=FALSE, cache=TRUE, fig.height=5, fig.width=7, fig.align="centre"}
+### plot 
+breakpoints <- unique(values(ecoRaster))
+breakpoints <- breakpoints[is.na(breakpoints)==F]
+breakpoints <- breakpoints[order(breakpoints)]
+breakpoints <- c(min(breakpoints)-1, breakpoints)
+#
+### empty plot
+r <- ecoRaster
+r <- setExtent(r, ext=e, keepres=TRUE, snap=TRUE)
+r[] <- NA
+plot(r, box=FALSE, axes=F, frame.plot=F, xaxt='n', yaxt='n', main= paste0("Simulated quadrat - ", ecozones[which(ecozones$code == a), "name"]))
+### ecozone plot
+plot(ecoRaster, breaks=breakpoints,  col=x$cols, legend=FALSE, add=TRUE)
+### Provinces boundaries
+plot(can1Cropped, border="grey25", lwd=1, add=TRUE)
+### simulation areas
+plot(simArea, add=TRUE, col="grey25", legend=FALSE)
+
+### LatLong gridlines
+# llgridlines(can1Cropped, col="black", cex=0.6)
+### legend
+legend("topright", legend = rev(levels(ecoRaster)[[1]]$ecoName), fill = rev(x$col), cex=0.7, bty="n", title = "Ecozones")
+```
+
+
+### Simulation setup
+
+* A combination of 5 or 6 species start to growth from bare ground and interact for 1000 years with unlimited seed supply. The emerging succession is presented below.
+
+* One cohort of each species is established at the beginning of each simulation. That is important to consider as that may differ from what mostly occur in nature, where cohort establishment may be delayed for some species, especially after large-scale disturbances and where species are distributed in highly contageous manners.
+
+* Because seed sources are not limiting in those simulations, any locally extinct species can come back later in the simulations.
+
+
+
+### Central Interior - Sub-Boreal Pine-Spruce Ecosystem
+```{r URLs, echo = F, cache = F}
+location <- "../"
+results <- paste0(location, "Figures/multiSppLandisSite_MC_974_4.png")
+```
+
+For that type of ecosystem, the following species, in approximate decreasing order of importance in the present landscape for this land type.
+
+1. Lodgepole Pine (PIN.CON.LAT)
+2. Spruces (PICE.ENG, but include all types of spruces except Black Spruce)
+3. Aspen (POPU.TRE)
+4. Douglas-fir (PSEU.MEN)
+5. Alpine fir (ABIE.LAS)
+6. Black Spruce (PICE.MAR)
+
+![alt text](`r results`)
+

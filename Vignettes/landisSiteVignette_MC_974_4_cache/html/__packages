@@ -1,0 +1,13 @@
+base
+bitops
+RCurl
+sp
+raster
+maptools
+rgdal
+lattice
+RColorBrewer
+latticeExtra
+rasterVis
+rgeos
+polyclip
