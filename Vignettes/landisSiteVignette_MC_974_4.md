@@ -54,6 +54,10 @@ For that type of ecosystem, the following species were included.
 
 * A combination of 5 or 6 species start to growth from bare ground and interact for 1000 years with unlimited seed supply. The emerging succession is presented below.
 
+* The pixel size is 6.25 ha. (250-m resolution)
+
+* No disturbances occur in those simulations.
+
 * One cohort of each species is established at the beginning of each simulation. That is important to consider as that may differ from what mostly occur in nature, where cohort establishment may be delayed for some species, especially after large-scale disturbances and where species are distributed in highly contageous manners.
 
 * Because seed sources are not limiting in those simulations, any locally extinct species can come back later in the simulations.

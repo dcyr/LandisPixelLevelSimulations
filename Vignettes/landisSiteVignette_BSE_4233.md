@@ -1,4 +1,4 @@
-# LANDIS-II Biomass Succession pixel-level simulations: Southern Interior Mountains - Interior Cedar Hemlock (preliminary results)
+# LANDIS-II Biomass Succession pixel-level simulations: Boreal Shield East - Temperate
 Dominic cyr  
 Updated on Oct 27 2015
 
@@ -14,7 +14,7 @@ Updated on Oct 27 2015
 
 ### Context
 
-This document presents pixel-level simulations of one specific land type chosen among the 64 land types defined for that quadrat. It was subjectively chosen among the most common land types to represent one general type of ecosystem.
+This document presents pixel-level simulations of one specific land type chosen among the 80 land types defined for that quadrat. It was subjectively chosen among the most common land types to represent one general type of ecosystem.
 
 We use such pixel-level simulation to assess the realism of emerging succession as simulated by _LANDIS-II Biomass Succession_, to minimise biases and document remaining ones.
 
@@ -26,21 +26,21 @@ We use such pixel-level simulation to assess the realism of emerging succession 
 
 
 
-<img src="landisSiteVignette_MC_987_4_files/figure-html/mapPlot-1.png" title="" alt=""  />
+<img src="landisSiteVignette_BSE_4233_files/figure-html/mapPlot-1.png" title="" alt=""  />
 
 -------
 
-### Southern Interior Mountains - Interior Cedar Hemlock 
+### Boreal Shield East - Temperate
 
 
 For that type of ecosystem, the following species were included.
 
-1. Western Hemlock (TSUG.HET)
-2. Western Redcedar (THUJ.PLI)
-3. Douglas-Fir (PSEU.MEN)
-4. Trembling Aspen (POPU.TRE)
-5. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-6. Lodgepole Pine (PIN.CON.LAT)
+1. White Birch (BETU.PAP)
+2. Trembling Aspen (POPU.TRE)
+3. Yellow Birch (BETU.ALL)
+4. Sugar Maple (ACER.SAH)
+5. American Beech (FAGU.GRA)
+6. Eastern Hemlock (TSUG.CAN)
 
 
 * In the figure below, note that some panels present average values AND enveloppes, while others only present average values.
@@ -66,7 +66,7 @@ For that type of ecosystem, the following species were included.
 -------
 
 ### Pixel-level simulation results
-![alt text](../Figures/multiSppLandisSite_MC_987_4.png)
+![alt text](../Figures/multiSppLandisSite_BSE_4233.png)
 
 
 
@@ -79,30 +79,40 @@ Only a subset of the following are included in the pixel-level simulations prese
 
 
 ```
-##                                 CommonName MaxLongevity SexualMaturity
-## ABIE.LAS     Subalpine fir (or alpine fir)          250             20
-## BETU.PAP                       White birch          150             20
-## LARI.OCC                     Western larch          900             25
-## PICE.ENG                  Engelmann spruce          300             30
-## PICE.MAR                      Black spruce          200             30
-## PINU.CON.LAT                Lodgepole pine          400             15
-## PINU.PON                    Ponderosa pine          700             15
-## POPU.TRE                   Trembling aspen          150             20
-## PSEU.MEN                       Douglas-fir          900             25
-## THUJ.PLI                  Western redcedar          900             25
-## TSUG.HET                   Western hemlock          475             25
-## TSUG.MER                  Mountain hemlock          700             20
+##                       CommonName MaxLongevity SexualMaturity
+## ABIE.BAL              Balsam fir          150             30
+## ACER.RUB               Red maple          150             10
+## ACER.SAH             Sugar maple          300             40
+## BETU.ALL            Yellow birch          300             40
+## BETU.PAP             White birch          150             20
+## FAGU.GRA                   Beech          250             40
+## LARI.LAR                Tamarack          150             40
+## PICE.GLA            White spruce          200             30
+## PICE.RUB              Red spruce          300             30
+## PICE.MAR            Black spruce          200             30
+## PINU.BAN               Jack pine          150             20
+## PINU.RES                Red pine          200             40
+## PINU.STR      Eastern white pine          300             20
+## POPU.TRE         Trembling aspen          150             20
+## QUER.RUB                 Red oak          250             30
+## THUJ.SPP.ALL Eastern white-cedar          300             30
+## TSUG.CAN         Eastern hemlock          300             60
 ##              ShadeTolerance
-## ABIE.LAS                  5
+## ABIE.BAL                  5
+## ACER.RUB                  3
+## ACER.SAH                  5
+## BETU.ALL                  3
 ## BETU.PAP                  2
-## LARI.OCC                  1
-## PICE.ENG                  4
+## FAGU.GRA                  5
+## LARI.LAR                  1
+## PICE.GLA                  3
+## PICE.RUB                  4
 ## PICE.MAR                  4
-## PINU.CON.LAT              1
-## PINU.PON                  2
+## PINU.BAN                  1
+## PINU.RES                  2
+## PINU.STR                  3
 ## POPU.TRE                  1
-## PSEU.MEN                  3
-## THUJ.PLI                  5
-## TSUG.HET                  5
-## TSUG.MER                  4
+## QUER.RUB                  3
+## THUJ.SPP.ALL              5
+## TSUG.CAN                  5
 ```
