@@ -1,5 +1,5 @@
 ---
-title: "LANDIS-II Biomass Succession pixel-level simulations: Central Interior - Sub-Boreal Pine-Spruce (preliminary results)"
+title: "LANDIS-II Biomass Succession pixel-level simulations: Sub-Boreal Interior - Sub-Boreal Spruce (preliminary results)"
 author: "Dominic cyr"
 output:
   html_document:
@@ -11,7 +11,6 @@ output:
 Updated on `r format(Sys.time(), "%b %d %Y")`
 
 -------
-
 
 ```{r packageLoadingChunk, include=FALSE}
 require(RCurl)
@@ -168,20 +167,19 @@ legend("topright", legend = rev(levels(ecoRaster)[[1]]$ecoName), fill = rev(x$co
 
 -------
 
-### Central Interior - Sub-Boreal Pine-Spruce Ecosystem
+### Sub-Boreal Interior - Sub-Boreal Spruce
 ```{r URLs, echo = F, cache = F}
 location <- "../"
-results <- paste0(location, "Figures/multiSppLandisSite_MC_974_4.png")
+results <- paste0(location, "Figures/multiSppLandisSite_MC_981_5.png")
 ```
 
 For that type of ecosystem, the following species were included.
 
-1. Lodgepole Pine (PIN.CON.LAT)
-2. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-3. Aspen (POPU.TRE)
-4. Douglas-fir (PSEU.MEN)
-5. Alpine fir (ABIE.LAS)
-6. Black Spruce (PICE.MAR)
+1. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
+2. Aspen (POPU.TRE)
+3. Alpine fir (ABIE.LAS)
+4. Black Spruce (PICE.MAR)
+5. White Birch (BETU.PAP)
 
 * In the figure below, note that some panels present average values AND enveloppes, while others only present average values.
 
@@ -200,7 +198,6 @@ For that type of ecosystem, the following species were included.
 * Because seed sources are not limiting in those simulations, any locally extinct species can come back later in the simulations.
 
 -------
-
 
 ### Pixel-level simulation results
 ![alt text](`r results`)

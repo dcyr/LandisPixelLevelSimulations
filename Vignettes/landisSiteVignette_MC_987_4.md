@@ -1,4 +1,4 @@
-# LANDIS-II Biomass Succession pixel-level simulations: Central Interior - Sub-Boreal Pine-Spruce (preliminary results)
+# LANDIS-II Biomass Succession pixel-level simulations: Southern Interior Mountains - Interior Cedar Hemlock (preliminary results)
 Dominic cyr  
 Updated on Oct 27 2015
 
@@ -26,21 +26,22 @@ We use such pixel-level simulation to assess the realism of emerging succession 
 
 
 
-<img src="landisSiteVignette_MC_974_4_files/figure-html/mapPlot-1.png" title="" alt=""  />
+<img src="landisSiteVignette_MC_987_4_files/figure-html/mapPlot-1.png" title="" alt=""  />
 
 -------
 
-### Central Interior - Sub-Boreal Pine-Spruce Ecosystem
+### Sub-Boreal Interior - Sub-Boreal Spruce
 
 
 For that type of ecosystem, the following species were included.
 
-1. Lodgepole Pine (PIN.CON.LAT)
-2. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
-3. Aspen (POPU.TRE)
-4. Douglas-fir (PSEU.MEN)
-5. Alpine fir (ABIE.LAS)
-6. Black Spruce (PICE.MAR)
+1. Western Hemlock (TSUG.HET)
+2. Western Red Cedar (THUJ.PLI)
+3. Douglas-Fir (PSEU.MEN)
+4. Aspen (POPU.TRE)
+5. Spruces (PICE.ENG, but includes all types of spruces except Black Spruce)
+6. Lodgepole Pine (PIN.CON.LAT)
+
 
 * In the figure below, note that some panels present average values AND enveloppes, while others only present average values.
 
@@ -60,9 +61,8 @@ For that type of ecosystem, the following species were included.
 
 -------
 
-
 ### Pixel-level simulation results
-![alt text](../Figures/multiSppLandisSite_MC_974_4.png)
+![alt text](../Figures/multiSppLandisSite_MC_987_4.png)
 
 
 
